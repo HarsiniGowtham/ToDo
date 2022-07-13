@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "834740583658",
+    "project_id": "todoauth-718cb",
+    "storage_bucket": "todoauth-718cb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:834740583658:android:3bbab8a92bcacb86732b93",
+        "android_client_info": {
+          "package_name": "com.gloify.todo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "834740583658-ck7rop310o92tkv85681gmnv6j3frss9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCArjzWIfBWdCnEmggB6JqMmJSglUa4JCI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "834740583658-ck7rop310o92tkv85681gmnv6j3frss9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
