@@ -11,8 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -21,11 +19,11 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.regex.Pattern;
 
-public class RegisterUser extends Activity implements View.OnClickListener{
+public class RegisterUser extends Activity implements View.OnClickListener {
 
     private FirebaseAuth mAuth;
     private TextView display2;
-    private EditText r_email, r_name,r_age, r_password;
+    private EditText r_email, r_name, r_age, r_password;
     private Button register_btn;
     private ProgressBar r_progressBar;
 
@@ -54,14 +52,14 @@ public class RegisterUser extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View view) {
 
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.Disp2_gloify:
-                startActivity(new Intent(this,LoginActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 break;
             case R.id.register_btn:
                 register_btn();
                 break;
-            
+
         }
 
     }
@@ -73,75 +71,73 @@ public class RegisterUser extends Activity implements View.OnClickListener{
         String email = r_email.getText().toString().trim();
         String passwd = r_password.getText().toString().trim();
 
-        if (name.isEmpty()){
+        if (name.isEmpty()) {
             r_name.setError("Name is required");
             r_name.requestFocus();
             return;
         }
 
-        if (age.isEmpty()){
+        if (age.isEmpty()) {
             r_age.setError("Age is required");
             r_age.requestFocus();
             return;
         }
 
-        if (email.isEmpty()){
+        if (email.isEmpty()) {
             r_email.setError("Email is required");
             r_email.requestFocus();
             return;
         }
 
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             r_email.setError("Please provide Valid email!");
             r_email.requestFocus();
             return;
 
         }
 
-        if (passwd.isEmpty()){
+        if (passwd.isEmpty()) {
             r_password.setError("Password is required");
             r_password.requestFocus();
             return;
         }
 
-        if (passwd.length()<6){
+        if (passwd.length() < 6) {
             r_password.setError("Minimum password character should be 6 character");
             r_password.requestFocus();
             return;
         }
 
         r_progressBar.setVisibility(View.VISIBLE);
-        mAuth.createUserWithEmailAndPassword(email,passwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, passwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
+            public void onComplete( Task<AuthResult> task) {
+                if (task.isSuccessful()) {
                     User user = new User(name, age, email);
 
                     FirebaseDatabase.getInstance().getReference("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                             .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
+                                public void onComplete( Task<Void> task) {
 
-                                    if(task.isSuccessful()){
-                                        Toast.makeText(RegisterUser.this,"Registered successfully", Toast.LENGTH_LONG).show();
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(RegisterUser.this, "Registered successfully", Toast.LENGTH_LONG).show();
                                         r_progressBar.setVisibility(View.GONE);
-                                    }else{
-                                        Toast.makeText(RegisterUser.this,"Failed to Register! Try Again!", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(RegisterUser.this, "Failed to Register! Try Again!", Toast.LENGTH_LONG).show();
                                         r_progressBar.setVisibility(View.GONE);
                                     }
 
                                 }
                             });
-                }else {
-                    Toast.makeText(RegisterUser.this,"Failed to Register! Try Again!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(RegisterUser.this, "Failed to Register! Try Again!", Toast.LENGTH_LONG).show();
                     r_progressBar.setVisibility(View.GONE);
                 }
             }
         });
 
     }
-
-
 
 
 }

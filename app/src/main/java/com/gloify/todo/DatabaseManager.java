@@ -11,41 +11,41 @@ public class DatabaseManager {
     private Context context;
     private SQLiteDatabase database;
 
-    public DatabaseManager(Context ctx){
+    public DatabaseManager(Context ctx) {
         context = ctx;
     }
 
-    public DatabaseManager open() throws SQLException{
+    public DatabaseManager open() throws SQLException {
 
         dbHelper = new DatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
     }
 
-    public void close(){
+    public void close() {
         dbHelper.close();
     }
 
-    public void insert(String Message, String Date, String Time){
+    public void insert(String Message, String Date, String Time) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.USER_MSG, Message);
         contentValues.put(DatabaseHelper.DATE, Date);
         contentValues.put(DatabaseHelper.TIME, Time);
-        database.insert(DatabaseHelper.DATABASE_TABLE,null,contentValues);
+        database.insert(DatabaseHelper.DATABASE_TABLE, null, contentValues);
     }
 
-    public Cursor fetch(){
-        String [] columns = new String[] {DatabaseHelper.USER_ID, DatabaseHelper.USER_MSG,
+    public Cursor fetch() {
+        String[] columns = new String[]{DatabaseHelper.USER_ID, DatabaseHelper.USER_MSG,
                 DatabaseHelper.DATE, DatabaseHelper.TIME};
         Cursor cursor = database.query(DatabaseHelper.DATABASE_TABLE, columns,
                 null, null, null, null, null);
-        if(cursor != null){
+        if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
     }
 
-    public int update(long id, String Message, String Date, String Time){
+    public int update(long id, String Message, String Date, String Time) {
         ContentValues contentValues = new ContentValues();
         contentValues.put(DatabaseHelper.USER_MSG, Message);
         contentValues.put(DatabaseHelper.DATE, Date);
@@ -55,9 +55,9 @@ public class DatabaseManager {
         return ret;
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         database.delete(DatabaseHelper.DATABASE_TABLE,
-                DatabaseHelper.USER_ID+ "=" + id,null);
+                DatabaseHelper.USER_ID + "=" + id, null);
     }
 
 }
