@@ -20,9 +20,10 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         android:src="@drawable/ic_baseline_add_24"
-        fab:fab_colorNormal="@android:color/holo_green_light"
+        fab:fab_colorNormal="@color/app_color"
         fab:fab_colorPressed="@android:color/holo_green_dark"
         fab:fab_size="normal" />
 

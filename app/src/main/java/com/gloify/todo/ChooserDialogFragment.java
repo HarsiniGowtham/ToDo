@@ -71,7 +71,6 @@ public class ChooserDialogFragment extends DialogFragment
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("Gowtham", ": submit : ");
                 ((ProfileActivity) getActivity()).insertData(date, time, message.getText().toString());
                 dismiss();
             }
